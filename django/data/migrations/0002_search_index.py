@@ -76,7 +76,8 @@ class Migration(migrations.Migration):
                 v."HGVS_protein_BIC",
                 v."HGVS_cDNA_BIC",
                 v."Ethnicity_BIC",
-                v."Patient_nationality_BIC")
+                v."Patient_nationality_BIC",
+                v."Translated_HGVS")
     INTO fts_document;
             RETURN to_tsvector('pg_catalog.simple', fts_document);
     END;

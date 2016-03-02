@@ -5,6 +5,11 @@ from __future__ import unicode_literals
 import ast
 import csv
 import os.path
+import re
+import hgvs.parser
+import hgvs.dataproviders.uta
+import hgvs.variantmapper
+import hgvs.exceptions
 
 from django.conf import settings
 from django.db import migrations
@@ -15,13 +20,37 @@ from data.models import Variant
 def load_from_csv(apps, schema_editor):
     file_path = os.path.join(settings.BASE_DIR, 'data', 'resources', 'merged_v5.csv')
     with open(file_path) as csv_file:
+
         reader = csv.reader(csv_file)
         header = reader.next()
+
+        parser = hgvs.parser.Parser()
+        data_provider = hgvs.dataproviders.uta.connect()
+        variantmapper = hgvs.variantmapper.VariantMapper(data_provider)
+
+        boolean_columns = []
+        canonical_hgvs_column = 0
+        for index,name in enumerate(header):
+            if re.match('^Variant_in',name):
+                boolean_columns.append(index)
+            if name == 'HGVS_genomic':
+                canonical_hgvs_column = index
+
         for row in reader:
-            # The first 6 columns of the database are booleans
-            for i in range(6):
+
+            for i in boolean_columns:
                 row[i] = ast.literal_eval(row[i])
-            Variant.objects.create_variant(dict(zip(header, row)))
+
+            try:
+                hgvs_variant = parser.parse_hgvs_variant(row[canonical_hgvs_column])
+                hgvs_c = variantmapper.g_to_c(hgvs_variant, 'NM_007297.3', 'splign')
+            except hgvs.exceptions.HGVSError as e:
+                hgvs_c = e.message
+
+            variant = dict(zip(header, row))
+            variant['Translated_HGVS'] = str(hgvs_c)
+
+            Variant.objects.create_variant(variant)
 
 
 class Migration(migrations.Migration):

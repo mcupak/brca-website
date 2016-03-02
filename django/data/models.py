@@ -73,6 +73,7 @@ class Variant(models.Model):
     HGVS_cDNA_BIC = models.TextField()
     Ethnicity_BIC = models.TextField()
     Patient_nationality_BIC = models.TextField()
+    Translated_HGVS = models.TextField()
 
     objects = VariantManager()
 

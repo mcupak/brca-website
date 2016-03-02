@@ -83,6 +83,7 @@ class Migration(migrations.Migration):
                 ('HGVS_cDNA_BIC', models.TextField()),
                 ('Ethnicity_BIC', models.TextField()),
                 ('Patient_nationality_BIC', models.TextField()),
+                ('Translated_HGVS', models.TextField())
             ],
             options={
                 'db_table': 'variant',
