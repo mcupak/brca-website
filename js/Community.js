@@ -51,32 +51,15 @@ var Community = React.createClass({
 
         return (error ? <p>{error}</p> :
             <Grid>
-                <Row>
-                    <div className='text-center Variant-detail-title'>
-                        <h3>BRCA Community</h3>
-                    </div>
-                </Row>
-                <Row>
-                    <Col sm={4}>
-                        <Pagination
-                            className="pagination pull-right-sm"
-                            currentPage={page}
-                            totalPages={totalPages}
-                            onChangePage={this.onChangePage} />
+                <Row className="btm-buffer">
+                    <Col md={8} mdOffset={2} className='alert alert-info btm-buffer'>
+                        <h2 className="text-center">BRCA Community pages coming soon!</h2>
+                        <h4 className="text-center">Please enter your details below to be notified when the site is ready</h4>
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={8} mdOffset={2}>
-                        <Table striped bordered>
-                            <tbody>
-                                {rows}
-                            </tbody>
-                        </Table>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={8} mdOffset={2}>
-                        <Link to="/signup"><Button>Join our mailing list and this community space</Button></Link>
+                    <Col className="text-center">
+                        <Link to="/signup" ><Button>Join our mailing list and this community space</Button></Link>
                     </Col>
                 </Row>
             </Grid>
