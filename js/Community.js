@@ -50,7 +50,7 @@ var Community = React.createClass({
         });
 
         return (error ? <p>{error}</p> :
-            <Grid>
+            <Grid id="main-grid">
                 <Row className="btm-buffer">
                     <Col md={8} mdOffset={2} className='alert alert-info btm-buffer'>
                         <h2 className="text-center">BRCA Community pages coming soon!</h2>
