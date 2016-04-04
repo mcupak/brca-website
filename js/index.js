@@ -9,6 +9,8 @@ require('es5-shim/es5-sham');
 
 require('./favicons');
 var React = require('react');
+var ReactDOM = require('react-dom');
+
 var PureRenderMixin = require('./PureRenderMixin'); // deep-equals version of PRM
 var DisclaimerModal = require('./DisclaimerModal');
 var RawHTML = require('./RawHTML');
@@ -30,15 +32,17 @@ var Community = require('./Community');
 
 var databaseKey = require('../databaseKey');
 
-var {Grid, Col, Row, Table} = require('react-bootstrap');
+var {Grid, Col, Row, Navbar, Nav, Table, NavItem,NavDropdown,
+    DropdownButton, MenuItem, Modal, Button} = require('react-bootstrap');
 
 var {VariantTable, ResearchVariantTable, research_mode_columns, columns} = require('./VariantTable');
 var {Signup} = require('./Signup');
 var VariantSearch = require('./VariantSearch');
-var {Navigation, State, Route, RouteHandler,
-    HistoryLocation, run, DefaultRoute} = require('react-router');
+var {Navigation, State, Route, Router, RouteHandler, HistoryLocation, IndexRoute} = require('react-router');
 
 var navbarHeight = 70; // XXX This value MUST match the setting in custom.css
+
+var D3LollipopSVG = require('./D3LollipopSVG');
 
 var variantPathJoin = row => _.map(databaseKey, k => encodeURIComponent(row[k])).join('@@');
 var variantPathSplit = id => _.object(databaseKey, _.map(id.split(/@@/), decodeURIComponent));
@@ -207,7 +211,7 @@ function urlFromDatabase(state) {
     // Need to diff from defaults. The defaults are in DataTable.
     // We could keep the defaults here, or in a different module.
     var {columnSelection, filterValues, sourceSelection,
-            search, page, pageLength, sortBy: {prop, order}} = state;
+        search, page, pageLength, sortBy: {prop, order}} = state;
     var hide = _.keys(_.pick(columnSelection, v => v == false));
     var hideSources = _.keys(_.pick(sourceSelection, v => v == 0));
     var excludeSources = _.keys(_.pick(sourceSelection, v => v == -1));
@@ -276,7 +280,9 @@ var Database = React.createClass({
     },
     render: function () {
         var {show} = this.props,
-            params = databaseParams(this.getQuery());
+            // TODO fix this
+            //params = databaseParams(this.props.location.query);
+            params = {};
         // XXX is 'keys' used?
         var table, message;
         if (this.props.mode === 'research_mode') {
@@ -325,16 +331,16 @@ var Database = React.createClass({
 });
 
 var Key = React.createClass({
-    render() {
+    render: function() {
         var {onClick, tableKey} = this.props;
         return (
-             <td className='help-target'>
+            <td className='help-target'>
                 {tableKey}
                 <span className="text-nowrap">
                     <span role='button' onClick={onClick}
-                        className='help glyphicon glyphicon-question-sign superscript'/>
+                          className='help glyphicon glyphicon-question-sign superscript'/>
                 </span>
-             </td>
+            </td>
         );
     }
 });
@@ -435,11 +441,10 @@ var Application = React.createClass({
         }
     },
     render: function () {
-        var path = this.getPath().slice(1);
+        var path = this.props.location.pathname;
         return (
             <div>
                 <NavBarNew path={path} mode={this.state.mode} toggleMode={this.onChildToggleMode}/>
-                <RouteHandler />
                 <Database
                     mode={this.state.mode}
                     show={path.indexOf('variants') === 0} />
@@ -450,19 +455,19 @@ var Application = React.createClass({
 });
 
 var routes = (
-    <Route handler={Application}>
-        <DefaultRoute handler={Home}/>
-        <Route path='about/:page' handler={About}/>
-        <Route path='help' handler={Help}/>
-        <Route path='community' handler={Community}/>
-        <Route path='signup' handler={Signup}/>
+    <Route path="/" component={Application}>
+        <IndexRoute component={Home}/>
+        <Route path='about/:page' component={About}/>
+        <Route path='help' component={Help}/>
+        <Route path='community' component={Community}/>
+        <Route path='signup' component={Signup}/>
         <Route path='variants' />
-        <Route path='variant/:id' handler={VariantDetail}/>
+        <Route path='variant/:id' component={VariantDetail}/>
     </Route>
 );
 
 var main = document.getElementById('main');
 
-run(routes, HistoryLocation, (Root) => {
-  React.render(<Root/>, main);
-});
+ReactDOM.render(<Router>{routes}</Router>, main)
+
+

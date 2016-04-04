@@ -11,8 +11,6 @@ var $ = require('jquery');
 var {Grid, Row, Col, Button} = require('react-bootstrap');
 var {Link, Navigation} = require('react-router');
 
-var Cookies = require('js-cookie');
-
 
 var AFFILIATION = [
     'I lead a testing lab',

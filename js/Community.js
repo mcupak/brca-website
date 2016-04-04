@@ -5,7 +5,7 @@ var PureRenderMixin = require('./PureRenderMixin'); // deep-equals version of PR
 var {Grid, Col, Row, Button, Table} = require('react-bootstrap');
 var backend = require('backend');
 var {Navigation, Link} = require('react-router');
-var {Pagination} = require('react-data-components-bd2k');
+var {Pagination} = require('react-data-components');
 var _ = require('underscore');
 
 var Community = React.createClass({

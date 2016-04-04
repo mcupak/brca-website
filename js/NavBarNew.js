@@ -4,8 +4,8 @@ var React = require('react');
 var PureRenderMixin = require('./PureRenderMixin'); // deep-equals version of PRM
 var DisclaimerModal = require('./DisclaimerModal');
 var RawHTML = require('./RawHTML');
-var {Modal, Button} = require('react-bootstrap');
-
+var {Grid, Col, Row, Navbar, Nav, Table, NavItem,NavDropdown,
+    DropdownButton, MenuItem, Modal, Button} = require('react-bootstrap');
 var content = require('./content');
 var Community = require('./Community');
 var databaseKey = require('../databaseKey');
@@ -73,39 +73,42 @@ var NavBarNew = React.createClass({
         var other_mode = (this.props.mode === 'research_mode') ? 'default' : 'research_mode';
         return (
             <div className="navbar-container">
-                <Navbar fixedTop brand={brand} toggleNavKey={0}>
-                    <Nav eventKey={0} navbar right>
-                        <NavLink to='/'>Home</NavLink>
-                        <DropdownButton className={this.activePath(path, "about")} ref='about' title='About'>
-                            <NavLink onClick={this.close} to='/about/variation'>
-                                BRCA1, BRCA2, and Cancer
-                            </NavLink>
-                            <NavLink onClick={this.close} to='/about/history'>
-                                History of the BRCA Exchange
-                            </NavLink>
-                            <NavLink onClick={this.close} to='/about/thisSite'>
-                                This Site
-                            </NavLink>
-                        </DropdownButton>
-                        <NavLink to='/variants'>Variants</NavLink>
-                        <NavLink to='/help'>Help</NavLink>
-                        <DropdownButton className={this.activePath(path, "mode")} ref='mode' title={mode_name}>
-                            {this.props.mode === 'research_mode' && <NavLink onClick={this.toggleMode} to='/variants'>
-                                Switch to {this.getModeName(other_mode)}
-                            </NavLink> }
-                            {this.props.mode === 'default' &&
-                            <NavLink onClick={() =>this.setState({showModal: true})} to='/variants'>
-                                Switch to {this.getModeName(other_mode)}
-                            </NavLink>}
-                            {this.props.mode === 'default' && this.state.showModal &&
-                            <Modal onRequestHide={() => this.setState({ showModal: false })}>
-                                <RawHTML html={content.pages.researchWarning}/>
-                                <Button onClick={() => {this.toggleMode() ;}}>Yes</Button>
-                                <Button onClick={() => this.setState({ showModal: false })}>No</Button>
-                            </Modal>}
-                        </DropdownButton>
-                        <NavLink to='/community'>Community</NavLink>
-                    </Nav>
+                <Navbar fixedTop>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            {brand}
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+                    <Navbar.Collapse>
+                        <Nav pullRight>
+                            <NavItem eventKey={1} href="/">Home</NavItem>
+                            <NavDropdown  className={this.activePath(path, "about")} eventKey={2} title="About"
+                                         id="dropdown-about">
+                                <MenuItem eventKey={2.1} href="/about/variation">BRCA1, BRCA2, and Cancer</MenuItem>
+                                <MenuItem eventKey={2.2} href="/about/history">History of the BRCA Exchange</MenuItem>
+                                <MenuItem eventKey={2.3} href="/about/thisSite">This Site</MenuItem>
+                            </NavDropdown>
+                            <NavItem eventKey={3} href='/variants'>Variants</NavItem>
+                            <NavItem eventKey={4} href='/help'>Help</NavItem>
+                            <NavDropdown id="dropdown-mode" className={this.activePath(path, "mode")} eventKey={5} ref='mode' title={mode_name}>
+                                {this.props.mode === 'research_mode' && <MenuItem eventKey={5.1} onClick={this.toggleMode} href='/variants'>
+                                    Switch to {this.getModeName(other_mode)}
+                                </MenuItem> }
+                                {this.props.mode === 'default' &&
+                                <MenuItem eventKey={5.1} onClick={() =>this.setState({showModal: true})} href='/variants'>
+                                    Switch to {this.getModeName(other_mode)}
+                                </MenuItem>}
+                                {this.props.mode === 'default' && this.state.showModal &&
+                                <Modal onRequestHide={() => this.setState({ showModal: false })}>
+                                    <RawHTML html={content.pages.researchWarning}/>
+                                    <Button onClick={() => {this.toggleMode() ;}}>Yes</Button>
+                                    <Button onClick={() => this.setState({ showModal: false })}>No</Button>
+                                </Modal>}
+                            </NavDropdown>
+                            <NavItem eventKey={6} href='/community'>Community</NavItem>
+                        </Nav>
+                    </Navbar.Collapse>
                 </Navbar>
             </div>
         );

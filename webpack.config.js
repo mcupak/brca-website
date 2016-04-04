@@ -53,9 +53,11 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			title: "Template Project",
+			title: "BRCA Exchange",
+			showErrors:true,
+			inject: 'body',
 			filename: "index.html",
-			template: "page.template",
+			template: "index.ejs",
 			analytics: analytics
 		}),
 		new webpack.OldWatchingPlugin()

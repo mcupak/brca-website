@@ -60,7 +60,7 @@ function url(opts) {
 }
 
 function data(opts) {
-    return Rx.DOM.get(url(opts)).map(xhr => JSON.parse(xhr.responseText));
+    return Rx.DOM.get({url: opts, crossDomain: true}).map(xhr => JSON.parse(xhr.responseText));
 }
 
 function users(opts) {

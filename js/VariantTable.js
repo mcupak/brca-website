@@ -18,7 +18,7 @@ var {Col, Panel, Button, Input} = require('react-bootstrap');
 var ColumnCheckbox = require('./ColumnCheckbox');
 
 
-require('react-data-components-bd2k/css/table-twbs.css');
+require('react-data-components/css/table-twbs.css');
 
 function buildHeader(onClick, title) {
     return (
