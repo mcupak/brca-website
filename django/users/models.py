@@ -5,11 +5,12 @@ from django.db import models
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, email, password, firstName, lastName, title, affiliation, institution, city, state, country, phone_number,
-                    comment, include_me, hide_number, hide_email):
+    def create_user(self, email, password, firstName="", lastName="", title="", affiliation="", institution="",
+                    city="", state="", country="",phone_number="", comment="", 
+                    include_me=False, email_me=False, hide_number=False, hide_email=False, has_image=False,
+                    is_admin=False, is_approved=False):
         """
-        Creates and saves a User with the given email, date of
-        birth and password.
+        Creates and saves a User with the given fields
         """
         if not email:
             raise ValueError('Users must have an email address')
@@ -28,34 +29,20 @@ class MyUserManager(BaseUserManager):
             phone_number=phone_number,
             comment=comment,
             include_me=include_me,
+            email_me=email_me,
             hide_number=hide_number,
-            hide_email=hide_email
+            hide_email=hide_email,
+            has_image=has_image,
+            is_admin=is_admin,
+            is_approved=is_approved
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self,  email, password, firstName, lastName,title, affiliation, institution, city, state, country, phone_number,
-                        comment, include_me, hide_number, hide_email):
-        user = self.create_user(email,
-                                password=password,
-                                firstName=firstName,
-                                lastName=lastName,
-                                title=title,
-                                affiliation=affiliation,
-                                institution=institution,
-                                city=city,
-                                state=state,
-                                country=country,
-                                phone_number=phone_number,
-                                comment=comment,
-                                include_me=include_me,
-                                hide_number=hide_number,
-                                hide_email=hide_email
-                                )
-        user.is_admin = True
-        user.save(using=self._db)
+    def create_superuser(self, **kwargs):
+        user = self.create_user(is_admin=True, **kwargs)
         return user
 
 
@@ -65,7 +52,6 @@ class MyUser(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-
     firstName = models.TextField(blank=True)
     lastName = models.TextField(blank=True)
     title = models.TextField(blank=True)
@@ -75,15 +61,17 @@ class MyUser(AbstractBaseUser):
     state = models.TextField(blank=True)
     country = models.TextField(blank=True)
     phone_number = models.TextField(max_length=30, blank=True)
+    hide_number = models.BooleanField(default=False)
 
     comment = models.TextField(blank=True)
-    # profile_image = ImageField(upload_to=get_image_path, blank=True, null=True)
-    hide_number = models.BooleanField(default=False)
     hide_email = models.BooleanField(default=False)
 
     include_me = models.BooleanField(default=True)
+    email_me = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_approved = models.BooleanField(default=False)
+    has_image = models.BooleanField(default=False)
 
     objects = MyUserManager()
 

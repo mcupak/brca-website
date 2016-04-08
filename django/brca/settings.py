@@ -11,21 +11,12 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from site_settings import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&wy54&8++2d+%57ipbcuw#utl0f@!9sd6j*r1-cy@ihgz1%eae'
-CAPTCHA_SECRET = '6LdwNBwTAAAAABi4FQqI_W8qzPiuDypc4re1DjuI'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -41,10 +32,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'rest_framework.authtoken',
 
     # project
     'brca',
 
+    'corsheaders',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -53,11 +46,24 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware'
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8080',
+    'brcaexchange.cloudapp.net',
+    'brcaexchange.org',
+    'brca-website.cloudapp.net'
+)
+
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
@@ -114,22 +120,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.9/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, "uploads")
+MEDIA_URL = "/site_media/media/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
 
 # Absolute path to the directory static files should be collected to.
 # Don"t put anything in this directory yourself; store your static files
@@ -147,8 +142,6 @@ STATICFILES_DIRS = [
 ]
 
 SITE_ID = 1
-
-MEDIA_URL = "/site_media/media/"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_PORT = 25

@@ -34,6 +34,8 @@ var {Grid, Col, Row, Table} = require('react-bootstrap');
 
 var {VariantTable, ResearchVariantTable, research_mode_columns, columns} = require('./VariantTable');
 var {Signup} = require('./Signup');
+var {Signin} = require('./Signin');
+var {Profile} = require('./Profile');
 var VariantSearch = require('./VariantSearch');
 var {Navigation, State, Route, RouteHandler,
     HistoryLocation, run, DefaultRoute} = require('react-router');
@@ -363,7 +365,6 @@ var VariantDetail = React.createClass({
             cols = columns;
         }
         var rows = _.map(cols, ({prop, title}) => {
-
             var row_item;
             if ((prop == "URL_ENIGMA" || prop == "Assertion_method_citation_ENIGMA") && variant[prop] != null) {
                 row_item = <a href={variant[prop]}>{variant[prop]}</a>
@@ -465,6 +466,8 @@ var routes = (
         <Route path='help' handler={Help}/>
         <Route path='community' handler={Community}/>
         <Route path='signup' handler={Signup}/>
+        <Route path='signin' handler={Signin}/>
+        <Route path='profile' handler={Profile}/>
         <Route path='variants' />
         <Route path='variant/:id' handler={VariantDetail}/>
     </Route>
