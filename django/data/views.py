@@ -57,16 +57,10 @@ def index(request):
 
         count = query.count()
 
-        if search_term:
-            # Number of synonym matches = total matches minus matches on "normal" columns
-            synonyms = count - apply_search(query, search_term, search_column='fts_standard').count()
-        else:
-            synonyms = 0
-
         query = select_page(query, page_size, page_num)
 
         # call list() now to evaluate the query
-        response = JsonResponse({'count': count, 'synonyms': synonyms, 'data': list(query.values(*column))})
+        response = JsonResponse({'count': count, 'data': list(query.values(*column))})
         response['Access-Control-Allow-Origin'] = '*'
         return response
 
@@ -104,12 +98,7 @@ def apply_search(query, search_term, search_column='fts_document', quotes=''):
 
 
 def apply_order(query, order_by, direction):
-    # special case for HGVS columns
-    if order_by in ('HGVS_cDNA', 'HGVS_Protein'):
-        order_by = 'Genomic_Coordinate_hg38'
-    if direction == 'descending':
-        order_by = '-' + order_by
-    return query.order_by(order_by, 'Pathogenicity_default')
+    return query.order_by(order_by, 'Cat_Dis')
 
 
 def select_page(query, page_size, page_num):
