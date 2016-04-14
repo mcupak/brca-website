@@ -6,10 +6,12 @@ from operator import __or__
 from django.db import connection
 from django.db.models import Q
 from django.http import JsonResponse, HttpResponse
+from django.views.decorators.gzip import gzip_page
 
 from .models import Variant
 
 
+@gzip_page
 def index(request):
     order_by = request.GET.get('order_by')
     direction = request.GET.get('direction')
@@ -23,7 +25,7 @@ def index(request):
     filter_values = request.GET.getlist('filterValue')
     column = request.GET.getlist('column')
 
-    query = Variant.objects
+    query = Variant.objects.all()
 
     if format == 'csv':
         quotes = '\''
@@ -75,8 +77,11 @@ def apply_sources(query, include, exclude):
 
 
 def apply_filters(query, filterValues, filters, quotes=''):
+    pathogenicity_values = {'Benign': 'Ben', 'Pathogenic': 'Path', 'Unknown': 'Unk'}
     # if there are multiple filters the row must match all the filters
     for column, value in zip(filters, filterValues):
+        if column  == 'Cat_Dis':
+            value = pathogenicity_values[value]
         if column == 'id':
             query = query.filter(**{column: value})
         else:
