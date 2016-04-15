@@ -69,8 +69,8 @@ var NavBarNew = React.createClass({
         var brand = (
             <a className="navbar-brand" href="/">
                 <h1>
-                    <span className="BRCA">BRCA</span>
-                    <span className="exchange"> Exchange</span>
+
+                    <span className="cogr">COGR Canadian Open Genetics Repository</span>
                 </h1>
                 {this.props.mode === 'research_mode' && <span id="research-label" className="label label-info">Research</span>}
             </a>);
