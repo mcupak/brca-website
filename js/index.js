@@ -380,7 +380,7 @@ var VariantDetail = React.createClass({
 
 
         return (error ? <p>{error}</p> :
-            <Grid>
+            <Grid id="main-grid">
                 <Row>
                     <div className='text-center Variant-detail-title'>
                         <h3>Variant Detail</h3>
