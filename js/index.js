@@ -21,7 +21,7 @@ var {NavBarNew} = require('./NavBarNew');
 var Rx = require('rx');
 require('rx-dom');
 
-var brcaLogo = require('./img/BRCA-Exchange-tall-tranparent.png');
+var brcaLogo = require('./img/COGR_logo.png');
 var logos = require('./logos');
 var slugify = require('./slugify');
 
