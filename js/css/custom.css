@@ -82,8 +82,12 @@
 }
 
 #research-label {
-    margin: 0 1em 0 1em;
+    margin: 0 1em 0 9em;
     font-size: 75%;
+}
+
+.label-info {
+    background-color: #BD5B5B;
 }
 
 .navbar {
