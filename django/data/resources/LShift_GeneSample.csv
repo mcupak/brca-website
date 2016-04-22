@@ -1,0 +1,8 @@
+Official_Symbol,Report_Symbol,Chr,Loc,Diseases_Drugs,Variants,Full_Name,Type,Alias_Symbols
+APC,APC,5,5q21-q22,"stomach cancer, colorectal cancer, hepatocellular carcinoma, colon carcinoma",5,adenomatous polyposis coli,Protein coding,"GS, DP2, DP3, BTPS2, DP2.5, PPP1R46"
+BRCA1,BRCA1,17,17q21,,9,breast cancer 1,Protein coding,"IRIS, PSCP, BRCAI, BRCC1, FANCS, PNCA4, RNF53, BROVCA1, PPP1R53"
+BRCA2,BRCA2,13,13q12.3,"breast cancer, desmoplastic medulloblastoma, nephroblastoma, prostate cancer, medulloblastoma",6,breast cancer 2,Protein coding,"FAD, FACD, FAD1, GLM3, BRCC2, FANCD, PNCA2, FANCD1, XRCC11, BROVCA2"
+MLH1,MLH1,3,3p21.3,Muir-Torre syndrome,4,mutL homolog 1,Protein coding,"FCC2, COCA2, HNPCC, hMLH1, HNPCC2"
+MSH2,MSH2,2,2p21,Muir-Torre syndrome,11,mutS homolog 2,Protein coding,"FCC1, COCA1, HNPCC, LCFS2, HNPCC1"
+MSH6,MSH6,2,2p16,endometrial carcinoma,10,mutS homolog 6,Protein coding,"GTBP, HSAP, p160, GTMBP, HNPCC5"
+MUTYH,MUTYH,1,1p34.1,"pilomatrixoma, stomach cancer",4,mutY DNA glycosylase,Protein coding,MYH

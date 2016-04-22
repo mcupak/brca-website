@@ -37,6 +37,8 @@ var {Signup} = require('./Signup');
 var {Signin} = require('./Signin');
 var {Profile} = require('./Profile');
 var VariantSearch = require('./VariantSearch');
+var GeneDetail = require('./GeneDetail');
+var DiseaseDetail = require('./DiseaseDetail');
 var {Navigation, State, Route, RouteHandler,
     HistoryLocation, run, DefaultRoute} = require('react-router');
 
@@ -405,6 +407,8 @@ var VariantDetail = React.createClass({
     }
 });
 
+
+
 // XXX implement in server
 //var dontSuggest = [
 //    'Assertion_method_citation',
@@ -469,6 +473,8 @@ var routes = (
         <Route path='profile' handler={Profile}/>
         <Route path='variants' />
         <Route path='variant/:id' handler={VariantDetail}/>
+        <Route path='gene/:name' handler={GeneDetail}/>
+        <Route path='disease/:name' handler={DiseaseDetail}/>
     </Route>
 );
 

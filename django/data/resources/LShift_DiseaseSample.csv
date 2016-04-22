@@ -1,0 +1,13 @@
+Name,Abbr,Inheritance,Codes,Description,Genes,Variants
+breast cancer,,,MIM 114480 (Breast cancer) DISEASE-ONTOLOGY 0001612 (breast cancer),A thoracic cancer that originates in the mammary gland. [url:http\://en.wikipedia.org/wiki/Mammary_tumor],"AKT1, ATM, BARD1, BRCA2, BRIP1, CASP8, CDH1, CHEK2, HMMR, KRAS, PALB2, PPM1D, RAD51, RAD54L, RB1CC1, SLC22A18, TP53, TSG101, XRCC3",6
+colon carcinoma,,,MIM 114500 (Colorectal cancer) DISEASE-ONTOLOGY 0001520 (colon carcinoma),,"AKT1, APC, AURKA, AXIN2, BUB1B, CCND1, CTNNB1, DCC, EP300, FLCN, MLH3, ODC1, PTPRJ, TLR2, TLR4, TP53",5
+colorectal cancer,,,DISEASE-ONTOLOGY 0009256 (colorectal cancer),"Note, different TP53 associated colorectal cancer disease also exists.","AKT1, APC, AURKA, AXIN2, BUB1B, CCND1, CTNNB1, DCC, EP300, FLCN, MLH3, ODC1, PTPRJ, TLR2, TLR4, TP53",5
+desmoplastic medulloblastoma,,,DISEASE-ONTOLOGY 0003866 (desmoplastic medulloblastoma),,"BRCA2, PTCH2, SUFU",6
+endometrial carcinoma,,,MIM 608089 (Endometrial cancer) DISEASE-ONTOLOGY 0002871 (endometrial carcinoma),A endometrial cancer that is located_in the tissue lining the uterus. [url:http\://www.cancer.gov/cancertopics/types/endometrial],"CDH1, MLH3, MSH6, PTEN",10
+hepatocellular carcinoma,,,MIM 114550 (Hepatocellular carcinoma) DISEASE-ONTOLOGY 0000684 (hepatocellular carcinoma),,"APC, AXIN1, CASP8, CTNNB1, MET, TP53",5
+medulloblastoma,,,MIM 155255 (Medulloblastoma) DISEASE-ONTOLOGY 0003858 (medulloblastoma),,"BRCA2, PTCH2, SUFU",6
+Muir-Torre syndrome,,,MIM 158320 (Muir-Torre syndrome) DISEASE-ONTOLOGY 0050465 (Muir-Torre syndrome),,"MLH1, MSH2",15
+nephroblastoma,,,MIM 194070 (Wilms tumor) DISEASE-ONTOLOGY 0002154 (nephroblastoma),"A kidney cancer that affects the kidneys and typically located_in children. [url:http\://en.wikipedia.org/wiki/Wilms%27_tumor, url:https\://health.google.com/health/ref/Wilms+tumor]","BRCA2, WT1",9
+pilomatrixoma,,,"MIM 132600 (Colorectal adenomatous polyposis, autosomal recessive, with pilomatricomas) DISEASE-ONTOLOGY 0005374 (pilomatrixoma)",,"CTNNB1, MUTYH",4
+prostate cancer,,,MIM 176807 (Prostate cancer) DISEASE-ONTOLOGY 0010283 (prostate cancer),,"AR, BRCA2, CDH1, CHEK2, HIP1, KLF6, MAD1L1, MSR1, MXI1, PTEN, ZFHX3",6
+stomach cancer,,,MIM 137215 (Gastric cancer) DISEASE-ONTOLOGY 0010534 (stomach cancer),A gastrointestinal system cancer that is located_in the stomach. [url:http\://en.wikipedia.org/wiki/Stomach],"APC, CASP10, CDH1, ERBB2, IL1B, IL1RN, IRF1, KLF6, KRAS, MUTYH",9

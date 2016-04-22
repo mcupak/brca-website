@@ -69,6 +69,22 @@ function users(opts) {
     return Rx.DOM.get(users_url).map(xhr => JSON.parse(xhr.responseText));
 }
 
+function gene(opts) {
+    var {name} = opts;
+    var gene_url = `${config.backend_url}/data/gene/?${qs.stringify(_.pick({
+        'name': name
+    }, v => v != null))}`;
+    return Rx.DOM.get(gene_url).map(xhr => JSON.parse(xhr.responseText));
+}
+
+function disease(opts) {
+    var {name} = opts;
+    var disease_url = `${config.backend_url}/data/disease/?${qs.stringify(_.pick({
+        'name': name
+    }, v => v != null))}`;
+    return Rx.DOM.get(disease_url).map(xhr => JSON.parse(xhr.responseText));
+}
+
 function lollipopData(opts) {
     opts.pageLength = 0;
     opts.format = 'json';
@@ -81,5 +97,7 @@ module.exports = {
     users,
     lollipopData,
     url,
-    trimSearchTerm
+    trimSearchTerm,
+    gene,
+    disease
 };

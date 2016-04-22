@@ -8,8 +8,21 @@ from django.db.models import Q
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.gzip import gzip_page
 
-from .models import Variant
+from .models import Variant, Disease, Gene
 
+def disease(request):
+    name = request.GET.get('name')
+    result = Disease.objects.values().get(Name=name)
+    response = JsonResponse(result)
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
+
+def gene(request):
+    name = request.GET.get('name')
+    result = Gene.objects.values().get(Official_Symbol=name)
+    response = JsonResponse(result)
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
 
 @gzip_page
 def index(request):

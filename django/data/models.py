@@ -37,3 +37,29 @@ class Variant(models.Model):
 
     class Meta:
         db_table = 'variant'
+
+class Disease(models.Model):
+    Name = models.TextField()
+    Abbr = models.TextField()
+    Inheritance = models.TextField()
+    Codes = models.TextField()
+    Description = models.TextField()
+    Genes = models.TextField()
+    Variants = models.TextField()
+
+    class Meta:
+        db_table = "disease"
+
+class Gene(models.Model):
+    Official_Symbol = models.TextField()
+    Report_Symbol = models.TextField()
+    Chr = models.TextField()
+    Loc = models.TextField()
+    Diseases_Drugs = models.TextField()
+    Variants = models.TextField()
+    Full_Name = models.TextField()
+    Type = models.TextField()
+    Alias_Symbols = models.TextField()
+
+    class Meta:
+        db_table = "gene"
