@@ -36,7 +36,7 @@ var DiseaseDetail = React.createClass({
     },
     componentWillMount: function () {
         backend.disease({
-            name: 'breast cancer'
+            name: this.props.params.name
         }).subscribe(
             resp => {
                 return this.setState({data: resp, error: null})

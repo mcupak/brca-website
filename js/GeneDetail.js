@@ -38,7 +38,7 @@ var GeneDetail = React.createClass({
     },
     componentWillMount: function () {
         backend.gene({
-            name: 'BRCA1'
+            name: this.props.params.name
         }).subscribe(
             resp => {
                 return this.setState({data: resp, error: null})
