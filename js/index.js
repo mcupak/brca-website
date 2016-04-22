@@ -40,7 +40,7 @@ var VariantSearch = require('./VariantSearch');
 var GeneDetail = require('./GeneDetail');
 var DiseaseDetail = require('./DiseaseDetail');
 var {Navigation, State, Route, RouteHandler,
-    HistoryLocation, run, DefaultRoute} = require('react-router');
+    HistoryLocation, run, DefaultRoute, Link} = require('react-router');
 
 var navbarHeight = 70; // XXX This value MUST match the setting in custom.css
 
@@ -371,6 +371,8 @@ var VariantDetail = React.createClass({
                 row_item = <a href={variant[prop]}>{variant[prop]}</a>
             } else if (prop == "Source_URL" && variant[prop] != null) {
                 row_item = _.map(variant[prop].split(','), url => <a href={url}>{url}</a>)
+            } else if (prop == "Locus") {
+                row_item = <Link to={"/gene/"+variant[prop]}>{variant[prop]}</Link>
             } else {
                 row_item = variant[prop]
             }
